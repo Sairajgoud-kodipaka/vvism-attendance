@@ -1,24 +1,50 @@
-# Logs
-logs
-*.log
+# Node.js
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+.pnpm-store/
 
-node_modules
-dist
-dist-ssr
-*.local
+# Deno / Supabase Edge Functions
+supabase/functions/*/node_modules/
+supabase/functions/*/.env.local # If you create local env files for functions
+supabase/functions/*/deno.lock
+supabase/functions/*/dist/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Env files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# Google Cloud Service Account Keys
+*.json # Be careful with this, only if you intend to ignore ALL JSON files, otherwise specify the exact file.
+
+# Specific sensitive file found in push attempt
+tensile-analyst-461703-i1-54e39fe3e7af.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS generated files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+out/
+
+# IDE files
+.idea/
+.vscode/
+
+# Other common exclusions
+package-lock.json # If you're using npm and want to regenerate it
+bun.lockb
