@@ -24,6 +24,7 @@ supabase/functions/*/dist/
 
 # Specific sensitive file found in push attempt
 tensile-analyst-461703-i1-54e39fe3e7af.json
+supabase.exe # Supabase CLI executable should not be committed
 
 # Logs
 logs/

@@ -1,73 +1,78 @@
-# Welcome to your Lovable project
+# VV Attendance App
 
-## Project info
+This is a student attendance management application built using a React frontend, Supabase for the database, and Supabase Edge Functions for integrating with Google Sheets.
 
-**URL**: https://lovable.dev/projects/11e5aecb-18bf-4d8d-8f8b-58d2c30148aa
+## Features:
+- Mark student attendance (Present/Absent)
+- Sort students by hall ticket number
+- Save attendance records to Supabase database
+- Sync attendance data to a Google Sheet
 
-## How can I edit this code?
+## Technologies Used:
+- **Frontend**: React.js
+- **Backend/Database**: Supabase
+- **Cloud Functions**: Supabase Edge Functions (Deno)
+- **Integration**: Google Sheets API
 
-There are several ways of editing your application.
+## Setup and Installation:
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/11e5aecb-18bf-4d8d-8f8b-58d2c30148aa) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### 1. Clone the repository:
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd vv-attendance
 ```
 
-**Edit a file directly in GitHub**
+### 2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+bun install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. Environment Variables (for Supabase & Google Sheets):
+Create a `.env.local` file in the root of your project and add your Supabase credentials:
 
-**Use GitHub Codespaces**
+```
+VITE_SUPABASE_URL="YOUR_SUPABASE_URL"
+VITE_SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY"
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+For Google Sheets integration, configure these secrets in your Supabase Dashboard under "Edge Functions" -> "Secrets":
+- `GOOGLE_SHEETS_PRIVATE_KEY`: Your Google Service Account private key (including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`)
+- `GOOGLE_SHEETS_CLIENT_EMAIL`: Your Google Service Account client email
+- `GOOGLE_SHEET_ID`: The ID of your Google Sheet (from its URL)
+- `SHEET_NAME`: The exact name of the sheet tab (e.g., `Class 1`)
+- `STUDENT_DATA_RANGE`: The range for student names and hall tickets (e.g., `A5:B`)
+- `HEADER_ROW`: The row number where column headers are located (e.g., `4`)
+- `STUDENT_DATA_START_ROW`: The row number where student data begins (e.g., `5`)
 
-## What technologies are used for this project?
+### 4. Deploy Supabase Edge Function:
+Ensure your `supabase/functions/sync-to-sheets/index.ts` is up-to-date with the latest code.
 
-This project is built with:
+Due to potential CLI issues, it is recommended to manually paste the function code directly into the Supabase Dashboard's "Edge Functions" -> "sync-to-sheets" -> "Code" tab and click "Deploy function".
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 5. Run the application:
+```bash
+npm run dev
+# or
+yarn dev
+# or
+bun dev
+```
 
-## How can I deploy this project?
+The application will typically run on `http://localhost:5173` (or similar).
 
-Simply open [Lovable](https://lovable.dev/projects/11e5aecb-18bf-4d8d-8f8b-58d2c30148aa) and click on Share -> Publish.
+## Project Structure (Key Files):
+- `src/components/AttendanceApp.tsx`: Main React component for attendance tracking.
+- `supabase/functions/sync-to-sheets/index.ts`: Supabase Edge Function for syncing attendance data to Google Sheets.
+- `src/sort_students.py`: Python script for sorting student data (if used).
 
-## Can I connect a custom domain to my Lovable project?
+## Troubleshooting:
+Refer to `ERROR.md` for a detailed log of encountered issues and their solutions during development.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Contribution:
+Feel free to contribute by opening issues or submitting pull requests.
