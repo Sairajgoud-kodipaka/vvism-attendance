@@ -1,4 +1,4 @@
-# VV Attendance App
+# VV Attendance Application 
 
 This is a student attendance management application built using a React frontend, Supabase for the database, and Supabase Edge Functions for integrating with Google Sheets.
 
